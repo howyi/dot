@@ -1,0 +1,25 @@
+[core]
+  repositoryformatversion = 0
+  filemode = false
+  bare = false
+  logallrefupdates = true
+  symlinks = false
+  ignorecase = true
+  hideDotFiles = dotGitOnly
+  autoCRLF = false
+[push]
+  default = current
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  log = auto
+[color "status"]
+  changed = green
+  added = blue
+  untracked = red
+[color "diff"]
+  old = red
+  new = blue
+[alias]
+  lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
