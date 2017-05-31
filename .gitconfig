@@ -4,7 +4,7 @@
   bare = false
   logallrefupdates = true
   symlinks = false
-  ignorecase = true
+  ignorecase = false
   hideDotFiles = dotGitOnly
   autoCRLF = false
 [push]
