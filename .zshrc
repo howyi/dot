@@ -77,6 +77,8 @@ setopt auto_pushd
 # vでvimを起動
 alias v=vim
 
+export EDITOR=/usr/bin/vim
+
 # git系
 alias gcm='git commit'
 alias gcmm='git commit -m'
