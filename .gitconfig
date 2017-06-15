@@ -22,4 +22,12 @@
   old = red
   new = blue
 [alias]
+  summary = status -u -s
+  branches = branch -a
+  tags = tag
+  staches = stash list
+  discard = checkout -- 
+  unstage = reset HEAD
+  amend = commit --amend
+  uncommit = reset --soft HEAD^
   lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
