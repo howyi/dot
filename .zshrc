@@ -86,17 +86,4 @@ alias v=vim
 
 export EDITOR=/usr/bin/vim
 
-# git系
-alias gcm='git commit'
-alias gcmm='git commit -m'
-alias gcma='git commit --amend'
-alias gco='git checkout'
-alias gb='git branch'
-alias gbd='git branch -D'
-alias gs='git status'
-alias gp='git push'
-alias gpf='git push -f'
-
-alias u='phpunit'
-
 echo 'こんにちは'
