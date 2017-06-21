@@ -28,6 +28,7 @@
   staches = stash list
   discard = checkout -- 
   unstage = reset HEAD
+  cut = checkout -b
   amend = commit --amend
   uncommit = reset --soft HEAD^
   lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
