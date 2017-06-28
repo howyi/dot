@@ -30,5 +30,10 @@
   unstage = reset HEAD
   cut = checkout -b
   amend = commit --amend
+  save = commit -m
+  reload = fetch --prune
+  remaster = rebase origin/master
   uncommit = reset --soft HEAD^
-  lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  modoshite = reset --hard HEAD@{1}
+  alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort  
+  network = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
