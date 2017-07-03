@@ -6,6 +6,7 @@ fpath=(~/zsh-completions $fpath)
 # 補完
 autoload -U compinit
 compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # 色
 autoload colors
