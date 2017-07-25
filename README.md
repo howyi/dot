@@ -1,7 +1,7 @@
 # dot
 ```
 $ cd ~
-$ git clone https://github.com/qrbys/dot.git
+$ git clone https://github.com/howyi/dot.git
 $ cd dot
 $ sh setup.sh
 ```
