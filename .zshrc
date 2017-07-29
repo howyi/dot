@@ -89,4 +89,8 @@ alias v=vim
 
 export EDITOR=/usr/bin/vim
 
+cd
+
+export ANSICON=true
+
 echo 'こんにちは'
