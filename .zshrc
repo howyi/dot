@@ -87,6 +87,9 @@ setopt share_history
 # vでvimを起動
 alias v=vim
 
+export PATH=$PATH:./node_modules/.bin
+export PATH=$PATH:./vendor/bin
+
 export EDITOR=/usr/bin/vim
 
 cd
