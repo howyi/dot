@@ -56,12 +56,12 @@ vcs_info_wrapper() {
 }
 RPROMPT=$'$(vcs_info_wrapper)'
 
-if type direnv >/dev/null 2>&2; then
-	eval "$(direnv hook zsh)"
-fi
-
 if [ -f ~/.linuxbrewrc ]; then
 	. ~/.linuxbrewrc
+fi
+
+if type direnv >/dev/null 2>&2; then
+	eval "$(direnv hook zsh)"
 fi
 
 # tabで順に補完候補を切り替える
