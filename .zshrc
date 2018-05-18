@@ -36,7 +36,13 @@ esac
 
 # プロンプト設定
 PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[red]}%}%~%{${reset_color}%}
-%{${fg[blue]}%}%% %{${reset_color}%}"
+%(?.%{$fg[green]%}.%{$fg[blue]%})%(?!🐔 <!🍗 <)%{${reset_color}%} "
+
+# プロンプト指定(コマンドの続き)
+PROMPT2='   < '
+
+# もしかして時のプロンプト指定
+SPROMPT="%{$fg[red]%}%{$suggest%}🔥 < Did you mean %B%r%b %{$fg[red]%}? [y, n, a, e]:${reset_color} "
 
 # 現在ブランチを右プロンプトに表示
 setopt prompt_subst
@@ -75,6 +81,8 @@ setopt auto_cd
 # cd時に自動でpush
 setopt auto_pushd
 
+setopt prompt_subst
+
 # History
 HISTFILE=${HOME}/.zsh_history
 HISTTIMEFORMAT="[%Y/%M/%D %H:%M:%S] "
@@ -89,10 +97,11 @@ alias v=vim
 
 export PATH=$PATH:./node_modules/.bin
 export PATH=$PATH:./vendor/bin
+export PATH=$PATH:$HOME/.composer/vendor/bin
 
 export EDITOR=/usr/bin/vim
 
-cd
+# cd
 
 export ANSICON=true
 
