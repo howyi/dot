@@ -35,7 +35,7 @@ linux*)
 esac
 
 # プロンプト設定
-PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[red]}%}%~%{${reset_color}%}
+PROMPT="%{${fg[magenta]}%}%n%{${reset_color}%} %{${fg[red]}%}%~%{${reset_color}%}
 %(?.%{$fg[green]%}.%{$fg[blue]%})%(?!🐔 <!🍗 <)%{${reset_color}%} "
 
 # プロンプト指定(コマンドの続き)
@@ -98,6 +98,7 @@ alias v=vim
 export PATH=$PATH:./node_modules/.bin
 export PATH=$PATH:./vendor/bin
 export PATH=$PATH:$HOME/.composer/vendor/bin
+export PATH=$PATH:$HOME/pear/bin/
 
 export EDITOR=/usr/bin/vim
 
