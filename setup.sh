@@ -14,3 +14,5 @@ ln -sf ~/dot/.tmux.d/mouse-after-2.1.conf ~/.tmux.d/
 
 ln -sf ~/dot/.minttyrc ~/.minttyrc
 ln -sf ~/dot/.gitconfig ~/.gitconfig
+
+ln -sf ~/dot/.hammerspoon ~/.hammerspoon
