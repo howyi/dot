@@ -2,71 +2,37 @@ require "fntools"
 require "extensions"
 require "keyboard_grid"
 
-function reloadConfig(files)
-    doReload = false
-    for _,file in pairs(files) do
-        if file:sub(-4) == ".lua" then
-            doReload = true
-        end
-    end
-    if doReload then
-        hs.reload()
-    end
-end
-myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/dot/.hammerspoon/", reloadConfig):start()
 hs.alert.show("🦉こんにちは🦉")
 
+---------------------------------------------------------
+-- 基本ショートカットキー
+---------------------------------------------------------
 local hyper = {"ctrl", "alt"}
-local hotkey = require "hs.hotkey"
-local grid = require "hs.grid"
+local hypershift = {"alt", "ctrl", "shift"}
 
-grid.MARGINX = 10
-grid.MARGINY = 10
-grid.GRIDHEIGHT = 6
-grid.GRIDWIDTH = 6
+---------------------------------------------------------
+-- グリッド設定
+---------------------------------------------------------
+hs.grid.MARGINX = 10
+hs.grid.MARGINY = 10
+hs.grid.GRIDHEIGHT = 6
+hs.grid.GRIDWIDTH = 6
 
-local mash = {"alt", "ctrl"}
-local mashshift = {"alt", "ctrl", "shift"}
-local slightmash = {"cmd", "ctrl"}
+---------------------------------------------------------
+-- ウィンドウ移動
+---------------------------------------------------------
+hs.hotkey.bind(hyper, 'DOWN', hs.grid.pushWindowDown)
+hs.hotkey.bind(hyper, 'UP', hs.grid.pushWindowUp)
+hs.hotkey.bind(hyper, 'LEFT', hs.grid.pushWindowLeft)
+hs.hotkey.bind(hyper, 'RIGHT', hs.grid.pushWindowRight)
 
-
---Move windows
-hotkey.bind(mash, 'DOWN', grid.pushWindowDown)
-hotkey.bind(mash, 'UP', grid.pushWindowUp)
-hotkey.bind(mash, 'LEFT', grid.pushWindowLeft)
-hotkey.bind(mash, 'RIGHT', grid.pushWindowRight)
-
---Move windows slightly
-hotkey.bind(slightmash, 'DOWN', grid.pushWindowDown)
-hotkey.bind(slightmash, 'UP', grid.pushWindowUp)
-hotkey.bind(slightmash, 'LEFT', grid.pushWindowLeft)
-hotkey.bind(slightmash, 'RIGHT', grid.pushWindowRight)
-
-
---resize windows
-hotkey.bind(mashshift, 'UP', grid.resizeWindowShorter)
-hotkey.bind(mashshift, 'DOWN', grid.resizeWindowTaller)
-hotkey.bind(mashshift, 'RIGHT', grid.resizeWindowWider)
-hotkey.bind(mashshift, 'LEFT', grid.resizeWindowThinner)
-
-
------------------------------------------------------------
----- アプリケーションショートカット
------------------------------------------------------------
-
-local fnutils = require "hs.fnutils"
-local partial = fnutils.partial
-local indexOf = fnutils.indexOf
-local filter = fnutils.filter
-
-local window = require "hs.window"
-local alert = require "hs.alert"
-local grid = require "hs.grid"
-
-yay = "ᕙ(⇀‸↼‶)ᕗ"
-boo = "ლ(ಠ益ಠლ)"
-
-hs.crash.crashLogToNSLog = true
+---------------------------------------------------------
+-- ウィンドウリサイズ
+---------------------------------------------------------
+hs.hotkey.bind(hypershift, 'UP', hs.grid.resizeWindowShorter)
+hs.hotkey.bind(hypershift, 'DOWN', hs.grid.resizeWindowTaller)
+hs.hotkey.bind(hypershift, 'RIGHT', hs.grid.resizeWindowWider)
+hs.hotkey.bind(hypershift, 'LEFT', hs.grid.resizeWindowThinner)
 
 ---------------------------------------------------------
 -- アプリケーションショートカット
@@ -75,8 +41,6 @@ hs.crash.crashLogToNSLog = true
 hs.hotkey.bind(hyper, "S", launchOrCycleFocus("Slack"))
 hs.hotkey.bind(hyper, "C", launchOrCycleFocus("Chatwork"))
 hs.hotkey.bind(hyper, "Q", fullScreenCurrent)
-hs.hotkey.bind(hyper, "D", screenToRight)
-
 
 ---------------------------------------------------------
 -- ウィンドウ一覧
@@ -85,12 +49,6 @@ hs.hotkey.bind(hyper, "D", screenToRight)
 hs.hotkey.bind(hyper, "K", function()
     hs.hints.windowHints()
 end)
-
-hs.hotkey.bind(hyper, "X", function()
-    hs.openConsole()
-    hs.focus()
-end)
-
 
 ---------------------------------------------------------
 -- デバッグ用
@@ -117,3 +75,32 @@ end
 
 --hs.hotkey.bind(hyper, "G", listAllApplications)
 hs.hotkey.bind(hyper, "G", listAllAboutCurrentApplication)
+
+---------------------------------------------------------
+-- コンフィグの自動リロード
+---------------------------------------------------------
+function reloadConfig(files)
+    doReload = false
+    for _,file in pairs(files) do
+        if file:sub(-4) == ".lua" then
+            doReload = true
+        end
+    end
+    if doReload then
+        hs.reload()
+    end
+end
+myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/dot/.hammerspoon/", reloadConfig):start()
+
+---------------------------------------------------------
+-- デバッグコンソールを開く
+---------------------------------------------------------
+hs.hotkey.bind(hyper, "X", function()
+    hs.openConsole()
+    hs.focus()
+end)
+
+---------------------------------------------------------
+-- デバッグ設定
+---------------------------------------------------------
+hs.crash.crashLogToNSLog = true
