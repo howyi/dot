@@ -13,8 +13,8 @@ function reloadConfig(files)
         hs.reload()
     end
 end
-myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
-hs.alert.show("🦉")
+myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/dot/.hammerspoon/", reloadConfig):start()
+hs.alert.show("🦉こんにちは🦉")
 
 local hyper = {"ctrl", "alt"}
 local hotkey = require "hs.hotkey"
