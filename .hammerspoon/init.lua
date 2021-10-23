@@ -2,7 +2,7 @@ require "fntools"
 require "extensions"
 require "keyboard_grid"
 
-hs.alert.show("🦉こんにちは🦉")
+hs.alert.show("🐔 HAMMERSPOON ACTIVATED 🐔")
 
 ---------------------------------------------------------
 -- 基本ショートカットキー
@@ -37,11 +37,9 @@ hs.hotkey.bind(hypershift, 'LEFT', hs.grid.resizeWindowThinner)
 ---------------------------------------------------------
 -- アプリケーションショートカット
 ---------------------------------------------------------
---hs.hotkey.bind(hyper, "1", launchOrCycleFocus("/Applications/Visual Studio Code.app", "Code"))
 hs.hotkey.bind(hyper, "S", launchOrCycleFocus("Slack"))
-hs.hotkey.bind(hyper, "C", launchOrCycleFocus("Chatwork"))
-hs.hotkey.bind(hyper, "D", launchOrCycleFocus("PhpStorm"))
-hs.hotkey.bind(hyper, "Z", launchOrCycleFocus("Google Chrome"))
+hs.hotkey.bind(hyper, "D", launchOrCycleFocus("IntelliJ IDEA"))
+hs.hotkey.bind(hyper, "C", launchOrCycleFocus("Google Chrome"))
 hs.hotkey.bind(hyper, "E", launchOrCycleFocus("Spark"))
 hs.hotkey.bind(hyper, "Q", fullScreenCurrent)
 

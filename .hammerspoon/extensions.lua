@@ -59,14 +59,6 @@ function hs.window:key()
 end
 
 
-function hs.window:isMaximized()
-    local screen = self:screen()
-    local screenFrame = screen:frame()
-
-    return compareShallow(self:frame(), screenFrame)
-end
-
-
 function hs.mouse.centerOnRect(rect)
     hs.mouse.setAbsolutePosition(geometry.rectMidPoint(rect))
 end
@@ -157,8 +149,12 @@ fullScreenCurrent = function()
     -- revert to prev state if prev state
     -- no fullscreen
     -- toggle fullscreen
+    local screen = window:screen()
+    local screenFrame = screen:frame()
 
-    if window:isMaximized() then
+    isMaximized = compareShallow(window:frame(), screenFrame)
+
+    if isMaximized then
         dbg('NOT MAXIMIZED')
         if appStates:lookup(window) then
             dbg('FOUND STATE')
@@ -196,6 +192,22 @@ screenToLeft = manipulateScreen(function(window, windowFrame, screen, screenFram
     window:setFrame(screenFrame)
 end)
 
+-- screenToUp = manipulateScreen(function(window, windowFrame, screen, screenFrame)
+--   -- windowFrame.x = 0
+--   windowFrame.w = screenFrame.w
+--   windowFrame.h = screenFrame.h / 2
+--   windowFrame.y = - (windowFrame.h / 2)
+--   window:setFrame(windowFrame)
+-- end)
+
+-- screenToDown = manipulateScreen(function(window, windowFrame, screen, screenFrame)
+--   -- windowFrame.x = 0
+--   windowFrame.w = screenFrame.w
+--   windowFrame.h = screenFrame.h / 2
+--   windowFrame.y = windowFrame.h / 2
+--   window:setFrame(windowFrame)
+-- end)
+
 ---------------------------------------------------------
 -- MOUSE
 ---------------------------------------------------------
@@ -217,7 +229,7 @@ function mouseHighlight()
 
     -- Prepare a big red circle around the mouse pointer
     mouseCircle = hs.drawing.circle(hs.geometry.rect(mousepoint.x-40, mousepoint.y-40, 80, 80))
-    mouseCircle:setFillColor({["red"]=0,["blue"]=1,["green"]=0,["alpha"]=0.5})
+    mouseCircle:setFillColor({["red"]=0,["blue"]=1,["green"]=0,["alpha"]=0.0})
     mouseCircle:setStrokeWidth(0)
     mouseCircle:show()
 
@@ -242,8 +254,8 @@ local function getNextWindow(windows, window)
         windows = hs.appfinder.appFromName(windows):allWindows()
     end
 
-    windows = filter(windows, hs.window.isStandard)
-    windows = filter(windows, hs.window.isVisible)
+    windows = filter(windows, function(w) return w.isStandard end )
+    windows = filter(windows, function(w) return w.isVisible end )
 
     -- need to sort by ID, since the default order of the window
     -- isn't usable when we change the mainWindow
@@ -276,28 +288,22 @@ end
 -- Needed to enable cycling of application windows
 lastToggledApplication = ''
 
-function launchOrCycleFocus(applicationName, applicationTitle)
+function launchOrCycleFocus(applicationName)
     return function()
         local nextWindow = nil
         local targetWindow = nil
         local focusedWindow          = hs.window.focusedWindow()
         local lastToggledApplication = focusedWindow and focusedWindow:application():title()
 
-        -- Note, applicationTitle is optional, and only useful in those
-        -- cases where the name and title are not the same (i.e. Visual Studio Code).
-        if applicationTitle == nil then
-            applicationTitle = applicationName
-        end
-
         if not focusedWindow then return nil end
 
         -- save the state of currently focused app
         appStates:save()
 
-        dbgf('last: %s, current: %s', lastToggledApplication, applicationTitle)
+        dbgf('last: %s, current: %s', lastToggledApplication, applicationName)
 
-        if lastToggledApplication == applicationTitle then
-            nextWindow = getNextWindow(applicationTitle, focusedWindow)
+        if lastToggledApplication == applicationName then
+            nextWindow = getNextWindow(applicationName, focusedWindow)
 
             -- Becoming main means
             -- * gain focus (although docs say differently?)
@@ -319,7 +325,6 @@ function launchOrCycleFocus(applicationName, applicationTitle)
             hs.application.launchOrFocus(applicationName)
         end
 
-        -- this blindly assumed that previous steps have been successful..
         if nextWindow then -- won't be available when appState empty
             targetWindow = nextWindow
         else
@@ -371,7 +376,7 @@ local eventToCharacter = compose(
 --   return hs.fnutils.contains({"a", "b", "c"}, key)
 -- end)
 --
--- @param {int} numberOfKeystrokes
+-- @param {int} numberOfKeystrokes
 -- @param {Function} callback gets each of the keystrokes as a parameter
 -- @param {Function} Optional validator for each of the keypresses
 -- @return nil

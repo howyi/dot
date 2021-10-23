@@ -28,17 +28,17 @@ function ApplicationWindowStates:new()
     return setmetatable({}, self)
 end
 
-function ApplicationWindowStates:key(window)
+function ApplicationWindowStates:id(window)
     if not window then
         return ''
     end
 
-    return window:key()
+    return window:id()
 end
 
 function ApplicationWindowStates:save()
     local window = hs.window.focusedWindow()
-    local applicationStateKey = self:key(window)
+    local applicationStateKey = self:id(window)
 
     self[applicationStateKey] = {
         ["screen"] = hs.mouse.getCurrentScreen(),
@@ -48,12 +48,12 @@ function ApplicationWindowStates:save()
 end
 
 function ApplicationWindowStates:lookup(window)
-    local key = self:key(window)
-    return self[key]
+    local id = self:id(window)
+    return self[id]
 end
 
 function ApplicationWindowStates:restore(window, restoreFn)
-    local restoreState = result(self, self:key(window))
+    local restoreState = result(self, self:id(window))
 
     local restoreMousePosition = compose(
             maybe(getProperty('mouse')),
