@@ -40,6 +40,7 @@ hs.hotkey.bind(hypershift, 'LEFT', hs.grid.resizeWindowThinner)
 hs.hotkey.bind(hyper, "S", launchOrCycleFocus("Slack"))
 hs.hotkey.bind(hyper, "D", launchOrCycleFocus("IntelliJ IDEA"))
 hs.hotkey.bind(hyper, "C", launchOrCycleFocus("Google Chrome"))
+hs.hotkey.bind(hyper, "A", launchOrCycleFocus("Spotify"))
 hs.hotkey.bind(hyper, "E", launchOrCycleFocus("Spark"))
 hs.hotkey.bind(hyper, "Q", fullScreenCurrent)
 

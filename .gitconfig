@@ -40,3 +40,7 @@
 [user]
 	name = howyi
 	email = howyi.lq@gmail.com
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
