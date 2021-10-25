@@ -16,3 +16,4 @@ ln -sf ~/dot/.minttyrc ~/.minttyrc
 ln -sf ~/dot/.gitconfig ~/.gitconfig
 
 ln -sf ~/dot/.hammerspoon ~/.hammerspoon
+ln -sf ~/dot/.config ~/.config
