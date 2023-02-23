@@ -38,8 +38,8 @@
   alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort  
   network = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [user]
-	name = howyi
-	email = howyi.lq@gmail.com
+	name = t-hayashi
+	email = t.hayashi.dev@gmail.com
 [pull]
 	rebase = false
 [init]
